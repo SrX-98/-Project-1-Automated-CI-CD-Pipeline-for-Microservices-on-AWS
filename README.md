@@ -1,25 +1,13 @@
 # Project-1 : Automated-CI-CD-Pipeline-for-Microservices-on-AWS
 Automate the build, test, containerization, and deployment of a microservices application using AWS-native DevOps tools.
 🧱 1. **Architecture Overview**
-           ┌─────────────────────────────┐
-           │        Developer            │
-           │     (Code push to GitHub)   │
-           └──────────────┬──────────────┘
-                          │
-                    Trigger Webhook
-                          │
-               ┌──────────▼──────────┐
-               │   AWS CodePipeline  │
-               └──────────┬──────────┘
-      ┌───────────────────┼──────────────────────┐
-      ▼                   ▼                      ▼
- AWS CodeBuild     AWS ECR (Docker Repo)    AWS CodeDeploy
-(Build & Test)     (Stores images)          (Deploys to ECS)
-                                              │
-                                              ▼
-                                      AWS ECS (Fargate)
-                                       + Application Load Balancer
-
+ 
+- **Developer:** Pushes code changes to GitHub.  
+- **CodePipeline:** Detects changes via webhook → orchestrates the flow.  
+- **CodeBuild:** Builds Docker image, runs tests, and pushes image to ECR.  
+- **ECR:** Stores built Docker images.  
+- **CodeDeploy:** Deploys the new version to ECS (Fargate).  
+- **ECS (Fargate):** Runs the containerized microservice behind a Load Balancer.
 
 -------------------------------------------------------------------------------------------------------
 
